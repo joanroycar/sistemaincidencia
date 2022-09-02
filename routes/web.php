@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +33,4 @@ Route::middleware([
 
 Route::resource('areas',AreaController::class)->names('areas');
 Route::resource('priorities',PriorityController::class)->names('priorities');
+Route::resource('category',CategoryController::class)->names('categories');
