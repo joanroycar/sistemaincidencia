@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\PriorityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +28,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('areas',AreaController::class)->names('areas');
+Route::resource('priorities',PriorityController::class)->names('priorities');

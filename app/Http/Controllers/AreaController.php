@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -14,7 +15,9 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
+        $areas = Area::all();
+
+        return view('area.index', compact('areas'));
     }
 
     /**
@@ -24,7 +27,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('area.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            
+        ]);
+        $area = Area::create($request->all());
+
+        return redirect()->route('areas.index')->with('guardar', 'ok');
     }
 
     /**
@@ -55,9 +64,9 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Area $area)
     {
-        //
+        return view('area.edit', compact('area'));
     }
 
     /**
@@ -67,9 +76,15 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Area $area)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            
+        ]);
+        $area->update($request->all());
+
+        return redirect()->route('areas.index')->with('guardar', 'ok');
     }
 
     /**
@@ -78,8 +93,10 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Area $area)
     {
-        //
+        $area->delete();
+
+        return redirect()->route('areas.index')->with('guardar', 'ok');
     }
 }

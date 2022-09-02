@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Priority;
 use Illuminate\Http\Request;
 
 class PriorityController extends Controller
@@ -14,7 +15,9 @@ class PriorityController extends Controller
      */
     public function index()
     {
-        //
+        $priorities = Priority::all();
+
+        return view('priority.index', compact('priorities'));
     }
 
     /**
@@ -24,7 +27,7 @@ class PriorityController extends Controller
      */
     public function create()
     {
-        //
+        return view('priority.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class PriorityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            
+        ]);
+        $priority = Priority::create($request->all());
+
+        return redirect()->route('priorities.index')->with('guardar', 'ok');
     }
 
     /**
@@ -55,9 +64,9 @@ class PriorityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Priority $priority)
     {
-        //
+        return view('priority.edit', compact('priority'));
     }
 
     /**
@@ -67,9 +76,15 @@ class PriorityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Priority $priority)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            
+        ]);
+        $priority->update($request->all());
+
+        return redirect()->route('priorities.index')->with('guardar', 'ok');
     }
 
     /**
@@ -78,8 +93,10 @@ class PriorityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Priority $priority)
     {
-        //
+        $priority->delete();
+
+        return redirect()->route('priorities.index')->with('guardar', 'ok');
     }
 }
