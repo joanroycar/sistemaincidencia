@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,5 @@ Route::resource('priorities',PriorityController::class)->names('priorities');
 Route::resource('category',CategoryController::class)->names('categories');
 Route::resource('subcategory',SubcategoryController::class)->names('subcategories');
 Route::resource('employee',EmployeeController::class)->names('employees');
-Route::resource('incidence',IncidenceController::class)->names('incidences');
+Route::resource('users',UserController::class)->names('users');
+

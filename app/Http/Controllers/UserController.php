@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('user.index',compact('users'));
     }
 
     /**
@@ -24,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.create');
     }
 
     /**
@@ -35,7 +37,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|email',
+            'password' => 'required|max:50|min:6',
+            
+        ],[
+            'name.required'=>'El nombre es un campo obligatorio, por favor.',
+            'email.required'=>'EL email es un campo obligatorio.',
+            'password.required'=>'La contraseña es un campo obligatorio.'
+        ]);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = ($request->password);
+        $user->save();// No es necesario poner Bycrit ya que en el Modelo hay un metodo
+        // que encripta todo los datos enviados en un Input con name password.
+
+        return redirect()->route('users.index')->with('guardar', 'ok');
     }
 
     /**
@@ -55,9 +75,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -67,9 +87,24 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'email' => 'required|email'
+        ],[
+            'name.required'=>'El nombre es un campo obligatorio, por favor.',
+            'email.required'=>'EL email es un campo obligatorio.'
+        ]);
+
+        $user->update([
+            $user->name = $request->name,
+            $user->email = $request->email,
+            $user->password = ($request->password) // No es necesario poner Bycrit ya que en el Modelo hay un metodo
+                                                   // que encripta todo los datos enviados en un Input con name password.
+        ]);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -78,8 +113,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }
