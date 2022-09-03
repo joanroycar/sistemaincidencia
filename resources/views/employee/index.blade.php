@@ -92,4 +92,68 @@
     
 </div>    
 @endsection
+@section('scripts')
+@if(session('guardar'))
+ 
+<script>
 
+     Swal.fire(
+     'Registrado!',
+     'Los datos se registraron.',
+     'success'
+     )
+
+ </script>
+@endif
+
+@if(session('eliminar'))
+
+<script>
+
+    Swal.fire(
+    'Eliminado!',
+    'Los datos se eliminaron.',
+    'success'
+    )
+
+</script>
+@endif
+@if(session('editar'))
+
+<script>
+
+    Swal.fire(
+    'Actualizados!',
+    'Los datos se actualizaron.',
+    'success'
+    )
+
+</script>
+@endif  
+<script>
+    $('.casino').submit(function(e){
+        e.preventDefault()
+  
+        Swal.fire({
+          title: 'Estas seguro de Eliminar?',
+          text: "¡No podrás revertir esto!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Eliminar!',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+  
+            
+            this.submit()
+            
+          }
+        })
+  
+    })
+  
+</script>
+
+@endsection
