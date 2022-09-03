@@ -42,6 +42,10 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|max:50|min:6',
             
+        ],[
+            'name.required'=>'El nombre es un campo obligatorio, por favor.',
+            'email.required'=>'EL email es un campo obligatorio.',
+            'password.required'=>'La contraseña es un campo obligatorio.'
         ]);
 
         $user = new User();
@@ -88,6 +92,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email'
+        ],[
+            'name.required'=>'El nombre es un campo obligatorio, por favor.',
+            'email.required'=>'EL email es un campo obligatorio.'
         ]);
 
         $user->update([
