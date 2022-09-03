@@ -16,7 +16,7 @@
             <label for="name" class="form-label">Nombre</label>
             <input type="name" class="form-control" id="name" name="name" value="{{$area->name}}">
             @error('name')
-                <strong class="text-sm text-red-600">{{$message}}</strong>
+                <strong class="text-sm text-red-600" style="color: red">{{$message}}</strong>
             @enderror  
         </div>
         

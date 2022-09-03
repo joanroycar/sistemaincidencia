@@ -41,6 +41,8 @@ class PriorityController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             
+        ],[
+            'name.required'=>'El campo nombre es requerido.'
         ]);
         $priority = Priority::create($request->all());
 
@@ -81,6 +83,8 @@ class PriorityController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             
+        ],[
+            'name.required'=>'El campo nombre es requerido.'
         ]);
         $priority->update($request->all());
 
