@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\SubcategoryController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
