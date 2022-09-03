@@ -57,9 +57,6 @@
                 <strong class="text-sm text-red-600"  style="color: red">{{$message}}</strong>
             @enderror  
         </div>
-       
-
-        
         <div class="col-12">
             <button type="submit" class="btn btn-primary" style="float: right;">Guardar Información</button>
         </div>
