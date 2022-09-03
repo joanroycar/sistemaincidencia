@@ -79,7 +79,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -88,9 +88,12 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        //
+        $area = Area::pluck('name','id');
+        $documenttype = DocumentType::pluck('name','id');
+        return view('employee.edit',compact('employee','documenttype','area'));
+
     }
 
     /**
@@ -100,9 +103,31 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Employee $employee)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'phone' => 'required|size:9',
+            'document_type_id' => 'required|not_in:Seleccione Un Tipo de Documento .....',
+            'area_id' => 'required|not_in:Seleccione Un Area .....',
+            'birthdate' => 'required|date',
+            'numdocument'=>'required|numeric'            
+        ],[
+            'name.required'=>'EL nombre es un campo obligatorio.',
+            'lastname.required'=>'El apellido es un campo obligatorio.',
+            'phone.required'=>'EL telefono es un campo obligatorio.',
+            'birthdate.required'=>'La fecha de nacimiento es un campo obligatorio.',
+            'document_type_id.required' => 'El Tipo De Documento es obligatorio.',
+            'area_id.required' => 'El area es obligatorio.',
+            'numdocument.required'=>'El número de documento es obligatorio.',
+            'numdocument.numeric'=>'El campo debe contener números.'
+
+        ]);
+
+        $employee->update($request->all());
+        return redirect()->route('employees.index')->with('editar', 'ok');
+
     }
 
     /**

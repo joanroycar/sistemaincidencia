@@ -88,7 +88,7 @@ class PriorityController extends Controller
         ]);
         $priority->update($request->all());
 
-        return redirect()->route('priorities.index')->with('guardar', 'ok');
+        return redirect()->route('priorities.index')->with('editar', 'ok');
     }
 
     /**
