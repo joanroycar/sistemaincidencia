@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
+use App\Models\DocumentType;
+use App\Models\Employee;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -14,7 +18,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::all();
+        return view('employee.index',compact('employees'));
     }
 
     /**
@@ -24,7 +29,11 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $area = Area::pluck('name','id');
+        $documenttype = DocumentType::pluck('name','id');
+
+        return view('employee.create',compact('documenttype','area'));
+   
     }
 
     /**
@@ -35,7 +44,31 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'phone' => 'required|numeric|max:9',
+            'document_type_id' => 'required|not_in:Seleccione Un Tipo de Documento .....',
+            'area_id' => 'required|not_in:Seleccione Un Area .....',
+            'datebirth' => 'required|date',
+            'numberdocument'=>'required|numeric'            
+        ],[
+            'name.required'=>'EL nombre es un campo obligatorio.',
+            'lastname.required'=>'El apellido es un campo obligatorio.',
+            'phone.required'=>'EL telefono es un campo obligatorio.',
+            'datebirth.required'=>'La fecha de nacimiento es un campo obligatorio.',
+            'document_type_id.required' => 'El Tipo De Documento es obligatorio.',
+            'area_id.required' => 'El area es obligatorio.',
+            'numberdocument.required'=>'El número de documento es obligatorio.',
+            'numberdocument.numeric'=>'El campo debe contener números.'
+
+        ]);
+    
+        $employee = Employee::create($request->all());
+
+        return redirect()->route('employees.index')->with('guardar', 'ok');
+
+
     }
 
     /**
