@@ -42,4 +42,5 @@ Route::resource('category',CategoryController::class)->names('categories');
 Route::resource('subcategory',SubcategoryController::class)->names('subcategories');
 Route::resource('employee',EmployeeController::class)->names('employees');
 Route::resource('users',UserController::class)->names('users');
+Route::resource('incidence',IncidenceController::class)->names('incidences');
 
