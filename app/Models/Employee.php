@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+    public function areas(){
+        return $this->belongsTo(Area::class,'area_id');
+    }
+
+    public function documenttypes(){
+        return $this->belongsTo(DocumentType::class,'document_type_id');
+    }
 }

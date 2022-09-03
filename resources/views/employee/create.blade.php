@@ -24,8 +24,8 @@
     </div>
     <div class="col-md-4">
         <label for="phone" class="form-label">Fecha Nacimiento</label>
-        {!! Form::date('datebirth', null, ['class' => 'form-control ', 'style'=>'color:black; background:white'. ($errors->has('fechaNacimiento') ? ' border-red-600' : '')]) !!}
-        @error('datebirth')
+        {!! Form::date('birthdate', null, ['class' => 'form-control ', 'style'=>'color:black; background:white'. ($errors->has('birthdate') ? ' border-red-600' : '')]) !!}
+        @error('birthdate')
             <strong class="text-sm text-red-600"  style="color: red">{{$message}}</strong>
         @enderror  
     </div>
@@ -51,9 +51,9 @@
             @enderror                    
         </div>
         <div class="col-md-6">
-            <label for="numberdocument" class="form-label">Numero de Documento</label>
-            <input type="text" class="form-control" id="numberdocument" name="numberdocument">
-            @error('numberdocument')
+            <label for="numdocument" class="form-label">Numero de Documento</label>
+            <input type="text" class="form-control" id="numdocument" name="numdocument">
+            @error('numdocument')
                 <strong class="text-sm text-red-600"  style="color: red">{{$message}}</strong>
             @enderror  
         </div>

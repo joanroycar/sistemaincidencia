@@ -31,11 +31,10 @@
                                             <th>ID</th>
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
-                                            <th>Tipo Empleado</th>
+                                            <th>Tipo Documento</th>
+                                            <th>N° de Documento</th>
                                             <th>Area</th>
                                             <th>Télefono</th>
-                                            <th>Numero de Documento</th>
-                                            <th>Dirección</th>
 
                                             <th  class="text-center dt-no-sorting">Acciones</th>
                                             
@@ -55,11 +54,10 @@
                                             </td>
                                             <td>{{$employee->name}}</td>
                                             <td>{{$employee->lastname}}</td>
-                                            <td>{{$employee->employeetypes->name}}</td>
+                                            <td>{{$employee->documenttypes->name}}</td>
+                                            <td>{{$employee->numdocument}}</td>
                                             <td>{{$employee->areas->name}}</td>
                                             <td>{{$employee->phone}}</td>
-                                            <td>{{$employee->numberdocument}}</td>
-                                            <td>{{$employee->address}}</td>
 
                                             <td class="text-center">
                                                 <ul class="table-controls">

@@ -47,20 +47,20 @@ class EmployeeController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'lastname' => 'required|max:255',
-            'phone' => 'required|numeric|max:9',
+            'phone' => 'required|size:9',
             'document_type_id' => 'required|not_in:Seleccione Un Tipo de Documento .....',
             'area_id' => 'required|not_in:Seleccione Un Area .....',
-            'datebirth' => 'required|date',
-            'numberdocument'=>'required|numeric'            
+            'birthdate' => 'required|date',
+            'numdocument'=>'required|numeric'            
         ],[
             'name.required'=>'EL nombre es un campo obligatorio.',
             'lastname.required'=>'El apellido es un campo obligatorio.',
             'phone.required'=>'EL telefono es un campo obligatorio.',
-            'datebirth.required'=>'La fecha de nacimiento es un campo obligatorio.',
+            'birthdate.required'=>'La fecha de nacimiento es un campo obligatorio.',
             'document_type_id.required' => 'El Tipo De Documento es obligatorio.',
             'area_id.required' => 'El area es obligatorio.',
-            'numberdocument.required'=>'El número de documento es obligatorio.',
-            'numberdocument.numeric'=>'El campo debe contener números.'
+            'numdocument.required'=>'El número de documento es obligatorio.',
+            'numdocument.numeric'=>'El campo debe contener números.'
 
         ]);
     
