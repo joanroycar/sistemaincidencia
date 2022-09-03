@@ -73,7 +73,7 @@
                 </a>
             </li>
             {{-- <li class="{{ (Request::is('products/*') || Request::is('products') || Request::is('product/*') ? 'active' : '') }}"><a href="{{url('products')}}"><i class="fa fa-code-fork"></i>&nbsp; Products</a></li> --}}
-            <li class="menu {{ (Request::is('areas') ? 'active' : '') }}">
+            <li class="menu {{ (Request::is('areas')||Request::is('areas/*') ? 'active' : '') }}">
                 <a href="{{route('areas.index')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg> --}}
@@ -84,7 +84,7 @@
                 </a>
             </li>
 
-            <li class="menu {{ (Request::is('priorities') ? 'active' : '') }}">
+            <li class="menu {{ (Request::is('priorities')||Request::is('priorities/*') ? 'active' : '') }}">
                 <a href="{{route('priorities.index')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg> --}}
@@ -124,7 +124,7 @@
                 </a>
             </li>
             <li class="menu ">
-                <a href="#invoice" data-bs-toggle="collapse" aria-expanded="{{ (Request::is('products') || Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'true' : '') }}" class="dropdown-toggle">
+                <a href="#invoice" data-bs-toggle="collapse" aria-expanded="{{ (Request::is('incidence') || Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'true' : '') }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>                        <span>Incidencias</span>
                     </div>
@@ -132,10 +132,10 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ (Request::is('products')||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
-                    <li class="{{ (Request::is('categories') ? 'active' : '') }}">
+                <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
+                    <li class="{{ (Request::is('incidence') ? 'active' : '') }}">
 
-                        <a href=""> Lista de Incidencias </a>
+                        <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
                     </li>
                     <li class="{{ (Request::is('measures') ? 'active' : '') }}">
                         <a href=""> Unidad de Medida </a>

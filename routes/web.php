@@ -3,6 +3,7 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\SubcategoryController;
 use App\Models\Category;
@@ -39,3 +40,4 @@ Route::resource('priorities',PriorityController::class)->names('priorities');
 Route::resource('category',CategoryController::class)->names('categories');
 Route::resource('subcategory',SubcategoryController::class)->names('subcategories');
 Route::resource('employee',EmployeeController::class)->names('employees');
+Route::resource('incidence',IncidenceController::class)->names('incidences');

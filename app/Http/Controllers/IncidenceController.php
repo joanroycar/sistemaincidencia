@@ -14,7 +14,7 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        //
+        return view('incidence.index');
     }
 
     /**
