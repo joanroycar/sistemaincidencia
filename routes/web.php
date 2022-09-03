@@ -3,7 +3,9 @@
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\SubcategoryController;
 use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +36,4 @@ Route::middleware([
 Route::resource('areas',AreaController::class)->names('areas');
 Route::resource('priorities',PriorityController::class)->names('priorities');
 Route::resource('category',CategoryController::class)->names('categories');
+Route::resource('subcategory',SubcategoryController::class)->names('subcategories');
