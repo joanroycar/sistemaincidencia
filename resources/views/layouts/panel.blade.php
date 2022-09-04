@@ -16,6 +16,8 @@
     <link href="{{asset('/layouts/vertical-dark-menu/css/light/plugins.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('/layouts/vertical-dark-menu/css/dark/plugins.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+    <link href="{{asset('/src/assets/css/dark/components/tabs.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/src/assets/css/dark/scrollspyNav.css"')}} rel="stylesheet" type="text/css" />
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{asset('/plugins/src/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
