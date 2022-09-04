@@ -28,6 +28,8 @@
 
     <link rel="stylesheet" type="text/css" href="{{asset('/plugins/css/light/table/datatable/dt-global_style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/plugins/css/dark/table/datatable/dt-global_style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/src/assets/css/dark/elements/alert.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/src/assets/css/light/elements/alert.css')}}">
 
     {{-- <script src="/plugins/src/apex/apexcharts.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
@@ -90,6 +92,8 @@
     <script src="{{asset('/layouts/vertical-dark-menu/app.js')}}"></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    <script src="{{asset('/src/plugins/src/highlight/highlight.pack.js')}}"></script>
+    <script src="{{asset('/src/assets/js/scrollspyNav.js')}}"></script>
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
    
