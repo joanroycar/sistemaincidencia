@@ -137,8 +137,8 @@
 
                         <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
                     </li>
-                    <li class="{{ (Request::is('measures') ? 'active' : '') }}">
-                        <a href=""> Unidad de Medida </a>
+                    <li class="{{ (Request::is('incidentes') ? 'active' : '') }}">
+                        <a href="{{route('incidente.index')}}">Asuntos Internos</a>
                     </li>
                     <li class="{{ (Request::is('products') ? 'active' : '') }}">
                         <a href=""> Producto </a>

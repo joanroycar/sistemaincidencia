@@ -44,4 +44,10 @@ Route::resource('subcategory',SubcategoryController::class)->names('subcategorie
 Route::resource('employee',EmployeeController::class)->names('employees');
 Route::resource('users',UserController::class)->names('users');
 Route::resource('incidence',IncidenceController::class)->names('incidences');
+Route::get('incidentes', [IncidenceController::class, 'getIncidentes'])->name('incidente.index');
+Route::get('incidente/{incidence}/edit', [IncidenceController::class, 'editIncidente'])->name('incidente.edit');
+Route::put('incidente/{incidence}/upload', [IncidenceController::class, 'addObservationFile'])->name('incidente.upload');
+Route::get('incidente/{incidence}/view', [IncidenceController::class, 'viewResource'])->name('incidente.view');
+Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
+// Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
 

@@ -132,4 +132,45 @@ class IncidenceController extends Controller
     {
         //
     }
+
+    public function getIncidentes()
+    {
+        $incidences = Incidence::all();
+        return view('incidence.internos.index',compact('incidences'));
+    }
+
+    public function editIncidente(Incidence $incidence)
+    {
+        return view('incidence.internos.edit', compact('incidence'));
+    }
+
+    public function addObservationFile(Request $request, Incidence $incidence)
+    {
+        $request->validate([
+            'observation_interno'=>'required',
+            'file'=>'required'
+        ]);
+
+        $url = $request->file->store('resources');
+
+        $incidence->resources()->create([
+            'url' => $url
+        ]);
+
+        $incidence->update([
+            $incidence->observation_interno = $request->observation_interno
+        ]);
+
+        return redirect()->route('incidente.index')->with('guardar', 'ok');
+    }
+
+    public function viewResource(Incidence $incidence)
+    {
+        return view('incidence.internos.show', compact('incidence'));
+    }
+
+    public function downloadResource(Request $request)
+    {
+        return response()->download(storage_path('app/' . $request->url));
+    }
 }

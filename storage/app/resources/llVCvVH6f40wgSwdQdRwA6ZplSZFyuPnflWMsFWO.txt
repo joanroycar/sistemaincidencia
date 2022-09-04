@@ -1,0 +1,953 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-09-2022 a las 08:27:07
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `logistica`
+--
+
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spcomprasmes` (IN `mesaño` VARCHAR(10))   BEGIN
+SELECT count(pe.status) as cantidad,pe.status as estado
+FROM purchases as pe
+WHERE date_format(pe.date_purchase,"%Y-%m")= mesaño
+GROUP BY pe.status;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sppedidosmes` (IN `mesaño` VARCHAR(10))   BEGIN
+SELECT count(pe.status_delivery) as cantidad,pe.status_delivery as estado
+FROM orders as pe
+WHERE date_format(pe.date_order,"%Y-%m")= mesaño
+GROUP BY pe.status_delivery;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `areas`
+--
+
+CREATE TABLE `areas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `areas`
+--
+
+INSERT INTO `areas` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'educacion\r\n', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'PAPELERIA', '2022-08-28 02:49:00', '2022-08-28 02:49:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `document_types`
+--
+
+CREATE TABLE `document_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `employee_type_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `area_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `datebirth` date NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numberdocument` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `employees`
+--
+
+INSERT INTO `employees` (`id`, `employee_type_id`, `area_id`, `name`, `lastname`, `phone`, `datebirth`, `address`, `numberdocument`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'JOAN', 'CARLOS', '934990190', '2022-08-11', 'av. los jazminez', '1112223333', '2022-08-28 02:53:42', '2022-08-28 02:53:42');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `employee_types`
+--
+
+CREATE TABLE `employee_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `employee_types`
+--
+
+INSERT INTO `employee_types` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'Normal', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(90, '2014_10_12_000000_create_users_table', 1),
+(91, '2014_10_12_100000_create_password_resets_table', 1),
+(92, '2014_10_12_200000_add_two_factor_columns_to_users_table', 1),
+(93, '2019_08_19_000000_create_failed_jobs_table', 1),
+(94, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(95, '2022_08_17_063203_create_sessions_table', 1),
+(96, '2022_08_18_000629_create_categories_table', 1),
+(97, '2022_08_18_001727_create_unit_measures_table', 1),
+(98, '2022_08_18_002057_create_areas_table', 1),
+(99, '2022_08_18_002418_create_employee_types_table', 1),
+(100, '2022_08_18_002526_create_document_types_table', 1),
+(101, '2022_08_18_002602_create_employees_table', 1),
+(102, '2022_08_18_002749_create_supliers_table', 1),
+(103, '2022_08_18_003051_create_products_table', 1),
+(104, '2022_08_18_003313_create_purchases_table', 1),
+(105, '2022_08_18_003428_create_purchase_details_table', 1),
+(106, '2022_08_18_003642_create_orders_table', 1),
+(107, '2022_08_18_003720_create_order_details_table', 1),
+(108, '2022_08_25_010341_create_permission_tables', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', 1),
+(1, 'App\\Models\\User', 2),
+(2, 'App\\Models\\User', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `employee_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `date_order` datetime NOT NULL,
+  `date_order_delivery` date DEFAULT NULL,
+  `total` decimal(8,2) NOT NULL,
+  `status` enum('PENDIENTE','ENTREGADO') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'PENDIENTE',
+  `status_delivery` enum('TIEMPO','DESTIEMPO') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `statusend` enum('COMPLETO','INCOMPLETO') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `employee_id`, `user_id`, `date_order`, `date_order_delivery`, `total`, `status`, `status_delivery`, `statusend`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2022-08-27 16:55:35', '2022-08-26', '5.90', 'ENTREGADO', 'TIEMPO', 'COMPLETO', '2022-08-28 02:55:35', '2022-08-28 03:01:25'),
+(2, 1, 1, '2022-08-27 18:35:32', '2022-08-31', '2.95', 'ENTREGADO', 'TIEMPO', 'COMPLETO', '2022-08-28 04:35:32', '2022-08-28 04:45:21'),
+(3, 1, 1, '2022-08-27 19:26:06', '2022-08-26', '2.95', 'ENTREGADO', 'TIEMPO', 'COMPLETO', '2022-08-28 05:26:06', '2022-08-28 05:41:52'),
+(4, 1, 1, '2022-08-27 19:43:59', '2022-08-26', '2.95', 'ENTREGADO', 'DESTIEMPO', 'COMPLETO', '2022-08-28 05:43:59', '2022-08-28 05:45:49'),
+(5, 1, 1, '2022-08-27 19:46:26', '2022-08-28', '2.95', 'ENTREGADO', 'TIEMPO', 'COMPLETO', '2022-08-28 05:46:26', '2022-08-28 05:48:28'),
+(6, 1, 1, '2022-08-28 22:44:04', '2022-08-03', '14.75', 'ENTREGADO', 'DESTIEMPO', 'COMPLETO', '2022-08-29 08:44:04', '2022-09-01 09:56:06'),
+(7, 1, 2, '2022-08-29 13:43:04', '2022-08-31', '48.38', 'ENTREGADO', 'DESTIEMPO', 'COMPLETO', '2022-08-29 23:43:04', '2022-09-01 09:56:15'),
+(8, 1, 2, '2022-08-29 23:51:51', '2022-08-11', '27.14', 'ENTREGADO', 'DESTIEMPO', 'COMPLETO', '2022-09-01 09:51:51', '2022-09-01 09:56:20'),
+(9, 1, 1, '2022-09-01 20:41:55', '2022-09-09', '29.50', 'ENTREGADO', 'TIEMPO', 'COMPLETO', '2022-09-02 06:41:55', '2022-09-02 06:42:00'),
+(10, 1, 1, '2022-09-01 20:42:25', '2022-09-29', '5.90', 'ENTREGADO', 'TIEMPO', 'INCOMPLETO', '2022-09-02 06:42:25', '2022-09-02 06:42:31'),
+(11, 1, 1, '2022-09-01 20:43:56', '2022-08-31', '2.95', 'ENTREGADO', 'DESTIEMPO', 'COMPLETO', '2022-09-02 06:43:56', '2022-09-02 06:44:02');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 2, '2.50', '2022-08-28 02:55:35', '2022-08-28 02:55:35'),
+(2, 2, 1, 1, '2.50', '2022-08-28 04:35:32', '2022-08-28 04:35:32'),
+(3, 3, 1, 1, '2.50', '2022-08-28 05:26:06', '2022-08-28 05:26:06'),
+(4, 4, 1, 1, '2.50', '2022-08-28 05:43:59', '2022-08-28 05:43:59'),
+(5, 5, 1, 1, '2.50', '2022-08-28 05:46:26', '2022-08-28 05:46:26'),
+(6, 6, 1, 5, '2.50', '2022-08-29 08:44:04', '2022-08-29 08:44:04'),
+(7, 7, 2, 2, '20.50', '2022-08-29 23:43:04', '2022-08-29 23:43:04'),
+(8, 8, 2, 1, '20.50', '2022-09-01 09:51:51', '2022-09-01 09:51:51'),
+(9, 8, 1, 1, '2.50', '2022-09-01 09:51:51', '2022-09-01 09:51:51'),
+(10, 9, 3, 10, '2.50', '2022-09-02 06:41:55', '2022-09-02 06:41:55'),
+(11, 10, 1, 2, '2.50', '2022-09-02 06:42:25', '2022-09-02 06:42:25'),
+(12, 11, 1, 1, '2.50', '2022-09-02 06:43:56', '2022-09-02 06:43:56');
+
+--
+-- Disparadores `order_details`
+--
+DELIMITER $$
+CREATE TRIGGER `tr_updStockPedido` AFTER INSERT ON `order_details` FOR EACH ROW BEGIN 
+UPDATE products SET stock = stock - NEW.quantity
+WHERE products.id = NEW.product_id;
+
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Modulo Productos', 'web', '2022-08-29 10:26:28', '2022-08-29 10:26:28'),
+(2, 'Modulo Pedidos', 'web', '2022-08-29 10:26:28', '2022-08-29 10:26:28'),
+(3, 'Modulo compras', 'web', '2022-08-29 10:26:28', '2022-08-29 10:26:28'),
+(4, 'Modulo Categorias', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(5, 'Modulo Unidad de Medida', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(6, 'Modulo Proveedores', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(7, 'Modulo Empleados', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(8, 'Modulo Roles', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(9, 'Modulo Areas', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(10, 'Modulo Usuarios', 'web', '2022-08-29 10:26:29', '2022-08-29 10:26:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `suplier_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `unit_measure_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `category_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stock` int(11) NOT NULL,
+  `stockmin` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `products`
+--
+
+INSERT INTO `products` (`id`, `suplier_id`, `unit_measure_id`, `category_id`, `name`, `stock`, `stockmin`, `price`, `image`, `code`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 'PAPEL BOND', 1, 12, 2.5, NULL, '000000', '1', '2022-08-28 02:52:28', '2022-08-28 02:52:28'),
+(2, 1, 1, 1, 'PAPEL LUSTRE', 7, 5, 20.5, NULL, '11111', '1', '2022-08-28 10:57:18', '2022-08-28 10:57:18'),
+(3, 1, 1, 1, 'bagui', 10, 10, 2.5, NULL, '0002', '1', '2022-09-02 05:51:02', '2022-09-02 05:51:02');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `suplier_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `date_purchase` datetime NOT NULL,
+  `tax` decimal(8,2) NOT NULL,
+  `total` decimal(8,2) NOT NULL,
+  `status` enum('VALID','CANCELED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'VALID',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `suplier_id`, `user_id`, `date_purchase`, `tax`, `total`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '2022-08-29 00:43:54', '18.00', '29.50', 'VALID', '2022-08-29 10:43:54', '2022-08-29 10:43:54'),
+(2, 1, 1, '2022-08-30 01:41:27', '18.00', '8.85', 'CANCELED', '2022-08-30 11:41:27', '2022-08-30 11:41:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `purchase_details`
+--
+
+CREATE TABLE `purchase_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `purchase_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `product_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `purchase_details`
+--
+
+INSERT INTO `purchase_details` (`id`, `purchase_id`, `product_id`, `quantity`, `price`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 10, '2.50', '2022-08-29 10:43:54', '2022-08-29 10:43:54'),
+(2, 2, 1, 3, '2.50', '2022-08-30 11:41:27', '2022-08-30 11:41:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'web', '2022-08-29 10:26:28', '2022-08-29 10:26:28'),
+(2, 'Empleado', 'web', '2022-08-29 10:26:28', '2022-08-29 10:26:28');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(3, 1),
+(3, 2),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('0kwXj5YXdyvNFtCXE8vW4Qye36sZd0Q2j5WxTaEa', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 OPR/89.0.4447.104', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoib0tDSUtLTnNNbzFucDJyZjlJaVBCSDdCQk44SXBUend6dEFDZnlwQiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly9zaXN0ZW1hbG9naXN0aWNhLnRlc3Qvb3JkZXJzL3JlcG9ydCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkZy94VzhTaS82ams0TFYvSUplbGZudXlRZnZzYk1CMy5PNWFzRTgvRDVNeTJJTnhVWTRLM20iO30=', 1662099818);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `supliers`
+--
+
+CREATE TABLE `supliers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ruc_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `supliers`
+--
+
+INSERT INTO `supliers` (`id`, `name`, `email`, `ruc_number`, `address`, `phone`, `created_at`, `updated_at`) VALUES
+(1, 'JOAN CARLOS', 'joanroycarlosvasquez@gmail.com', '123456789', 'av. los jazminez', '934990190', '2022-08-28 02:49:52', '2022-08-28 02:49:52');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unit_measures`
+--
+
+CREATE TABLE `unit_measures` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `unit_measures`
+--
+
+INSERT INTO `unit_measures` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(1, 'UNIDAD', '2022-08-28 02:49:32', '2022-08-28 02:49:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
+(1, 'JOAN CARLOS', 'joanroycarlosvasquez@gmail.com', NULL, '$2y$10$g/xW8Si/6jk4LV/IJelfnuyQfvsbMB3.O5asE8/D5My2INxUY4K3m', NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 02:48:32', '2022-08-29 04:26:22'),
+(2, 'Bruno Aguirre', 'admin@gmail.com', NULL, '$2y$10$g/xW8Si/6jk4LV/IJelfnuyQfvsbMB3.O5asE8/D5My2INxUY4K3m', NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(3, 'Carlos Aguirre', 'bagui@gmail.com', NULL, '$2y$10$vf1hKenpz77CGzjHQc1ebeNaRg2ddI6b8Cr2t/rrdBOc12subBF0i', NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(4, 'Prof. Sofia Ledner', 'mhomenick@example.org', '2022-08-29 10:26:29', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, NULL, 'Xd7sEnxcih', NULL, NULL, '2022-08-29 10:26:29', '2022-08-29 10:26:29'),
+(5, 'Erick', 'erickcar@gmail.com', NULL, '123456789', NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-01 01:52:46', '2022-09-01 01:52:46');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `areas`
+--
+ALTER TABLE `areas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `document_types`
+--
+ALTER TABLE `document_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `employees_employee_type_id_foreign` (`employee_type_id`),
+  ADD KEY `employees_area_id_foreign` (`area_id`);
+
+--
+-- Indices de la tabla `employee_types`
+--
+ALTER TABLE `employee_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indices de la tabla `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indices de la tabla `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indices de la tabla `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_employee_id_foreign` (`employee_id`),
+  ADD KEY `orders_user_id_foreign` (`user_id`);
+
+--
+-- Indices de la tabla `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_details_order_id_foreign` (`order_id`),
+  ADD KEY `order_details_product_id_foreign` (`product_id`);
+
+--
+-- Indices de la tabla `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indices de la tabla `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indices de la tabla `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indices de la tabla `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `products_suplier_id_foreign` (`suplier_id`),
+  ADD KEY `products_unit_measure_id_foreign` (`unit_measure_id`),
+  ADD KEY `products_category_id_foreign` (`category_id`);
+
+--
+-- Indices de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchases_suplier_id_foreign` (`suplier_id`),
+  ADD KEY `purchases_user_id_foreign` (`user_id`);
+
+--
+-- Indices de la tabla `purchase_details`
+--
+ALTER TABLE `purchase_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchase_details_purchase_id_foreign` (`purchase_id`),
+  ADD KEY `purchase_details_product_id_foreign` (`product_id`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indices de la tabla `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indices de la tabla `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indices de la tabla `supliers`
+--
+ALTER TABLE `supliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `unit_measures`
+--
+ALTER TABLE `unit_measures`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `areas`
+--
+ALTER TABLE `areas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `document_types`
+--
+ALTER TABLE `document_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `employee_types`
+--
+ALTER TABLE `employee_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+
+--
+-- AUTO_INCREMENT de la tabla `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `purchase_details`
+--
+ALTER TABLE `purchase_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `supliers`
+--
+ALTER TABLE `supliers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `unit_measures`
+--
+ALTER TABLE `unit_measures`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `employees_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `employees_employee_type_id_foreign` FOREIGN KEY (`employee_type_id`) REFERENCES `employee_types` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_employee_id_foreign` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `order_details`
+--
+ALTER TABLE `order_details`
+  ADD CONSTRAINT `order_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `order_details_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `products_suplier_id_foreign` FOREIGN KEY (`suplier_id`) REFERENCES `supliers` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `products_unit_measure_id_foreign` FOREIGN KEY (`unit_measure_id`) REFERENCES `unit_measures` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `purchases`
+--
+ALTER TABLE `purchases`
+  ADD CONSTRAINT `purchases_suplier_id_foreign` FOREIGN KEY (`suplier_id`) REFERENCES `supliers` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `purchases_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `purchase_details`
+--
+ALTER TABLE `purchase_details`
+  ADD CONSTRAINT `purchase_details_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `purchase_details_purchase_id_foreign` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

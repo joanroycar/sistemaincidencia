@@ -30,6 +30,8 @@ class Incidence extends Model
 
     }
 
-    
+    public function resources(){
+        return $this->morphMany(Resource::class, 'resourceable');
+    }
 
 }
