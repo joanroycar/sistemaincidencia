@@ -56,10 +56,60 @@
                                             <td>{{$incidence->users->name}}</td>
                                             <td>{{$incidence->subcategories->categories->name}}</td>
                                             <td>{{$incidence->subcategories->name}}</td>
-                                            <td>{{$incidence->priorities->name}}</td>
+                                            <td>
+                                    
+                                                @switch($incidence->priorities->name)
+                                                @case('ALTA')
+                                                <span class="badge badge-light-danger inv-status">ALTA</span>
+                
+                                                @break
+                                                @case('BAJA')
+                                                <span class="badge badge-light-info inv-status">BAJA</span>
+                
+                                                @break
+                                                @case('MEDIA')
+                                                <span class="badge badge-light-warning inv-status">MEDIA</span>
+                
+                                                @break
+                                                @default
+                                                @endswitch
+                                            
+                                            </td>
                                             <td>{{$incidence->fechareporte}}</td>
-                                            <td>{{$incidence->fechatermino}}</td>
-                                            <td>{{$incidence->status}}</td>
+                                            <td>
+                                                
+                                                @if($incidence->fechatermino == '')
+                                                <span class="badge badge-light-secondary inv-status display">A TERMINAR</span>
+
+                                                @else 
+                                                {{$incidence->fechatermino}}
+
+                                                @endif
+                                                
+                                            
+                                            
+                                            
+                                            
+                                            </td>
+                                            <td>
+                                                 {{-- {{$incidence->status}} --}}
+                                                @switch($incidence->status)
+                                @case('CERRADO')
+                                <span class="badge badge-light-success inv-status">CERRADO</span>
+
+                                @break
+                                @case('ABIERTO')
+                                <span class="badge badge-light-warning inv-status">ABIERTO</span>
+
+                                @break
+
+                                @default
+                                @endswitch
+                                            
+                                            
+                                            
+                                            
+                                            </td>
 
                                             <td class="text-center">
                                                 <ul class="table-controls">
