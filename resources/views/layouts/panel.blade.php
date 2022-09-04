@@ -29,6 +29,8 @@
 
     {{-- <script src="/plugins/src/apex/apexcharts.min.js"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    @yield('css')
+
 </head>
 <body class="layout-boxed">
     <!-- BEGIN LOADER -->

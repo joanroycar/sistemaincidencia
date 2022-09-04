@@ -35,6 +35,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('get-states', [IncidenceController::class, 'getStates'])->name('getStates');
 
 Route::resource('areas',AreaController::class)->names('areas');
 Route::resource('priorities',PriorityController::class)->names('priorities');
