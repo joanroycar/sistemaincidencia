@@ -25,10 +25,10 @@ return new class extends Migration
             $table->foreign('priority_id')->references('id')->on('priorities');
             $table->string('asunto');
             $table->dateTime('fechareporte');
-            $table->dateTime('fechatermino');
-            $table->text('observation');
-            $table->text('observation_soma');
-            $table->text('observation_interno');
+            $table->dateTime('fechatermino')->nullable();
+            $table->text('observation')->nullable();
+            $table->text('observation_soma')->nullable();
+            $table->text('observation_interno')->nullable();
             $table->enum('status',['ABIERTO','CERRADO'])->default('ABIERTO');
             $table->timestamps();
         });
