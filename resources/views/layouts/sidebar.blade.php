@@ -124,7 +124,7 @@
                 </a>
             </li>
             <li class="menu ">
-                <a href="#invoice" data-bs-toggle="collapse" aria-expanded="{{ (Request::is('incidence') || Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'true' : '') }}" class="dropdown-toggle">
+                <a href="#invoice" data-bs-toggle="collapse" aria-expanded="{{ (Request::is('incidence')||Request::is('incidence/*')  || Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'true' : '') }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>                        <span>Incidencias</span>
                     </div>
@@ -132,8 +132,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
-                <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
-                    <li class="{{ (Request::is('incidence') ? 'active' : '') }}">
+                <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('incidence/*') ||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
+                    <li class="{{ (Request::is('incidence')||Request::is('incidence/*')  ? 'active' : '') }}">
 
                         <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
                     </li>
