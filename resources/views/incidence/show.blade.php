@@ -112,9 +112,8 @@
                             </blockquote>
                         </div>
                     </div>
-    
-                    
-    
+
+                    @include('incidence.internos.prueba')
                 </div>
             </div>
         </div>

@@ -40,6 +40,7 @@ class IncidenceController extends Controller
 
 
         return view('incidence.create',compact('employees','subcategories','category','priorities'));
+    
     }
     public function getStates(Request $request)
     {
@@ -105,9 +106,16 @@ class IncidenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Incidence $incidence)
     {
-        //
+        $employees= Employee::pluck('name','id');
+        $subcategories= Subcategory::pluck('name','id');
+        $category= Category::pluck('name','id');
+        $priorities= Priority::pluck('name','id');
+
+
+        return view('incidence.edit',compact('incidence','employees','subcategories','category','priorities'));
+    
     }
 
     /**
@@ -117,9 +125,29 @@ class IncidenceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Incidence $incidence)
     {
-        //
+        $request->validate([
+            'asunto' => 'required|max:255',
+            'employee_id' => 'required|not_in:Seleccione Un Empleado .....',
+            'priority_id' => 'required|not_in:Seleccione Una Prioridad .....',
+            'subcategory_id' => 'required|not_in:Seleccione una Subcategoria .....',
+            'observation' => 'required|not_in:Seleccione Un Area .....',         
+         ]
+        //  ,[
+        //     'name.required'=>'EL nombre es un campo obligatorio.',
+        //     'lastname.required'=>'El apellido es un campo obligatorio.',
+        //     'phone.required'=>'EL telefono es un campo obligatorio.',
+        //     'birthdate.required'=>'La fecha de nacimiento es un campo obligatorio.',
+        //     'document_type_id.required' => 'El Tipo De Documento es obligatorio.',
+        //     'area_id.required' => 'El area es obligatorio.',
+        //     'numdocument.required'=>'El número de documento es obligatorio.',
+        //     'numdocument.numeric'=>'El campo debe contener números.'
+
+        //  ]
+        );
+        $incidence->update($request->all());
+        return redirect()->route('incidences.index')->with('editar', 'ok');
     }
 
     /**
@@ -130,7 +158,7 @@ class IncidenceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 
     public function getIncidentes()
