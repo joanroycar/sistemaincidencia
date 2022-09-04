@@ -36,7 +36,12 @@ Route::middleware([
     })->name('dashboard');
 });
 Route::get('get-states', [IncidenceController::class, 'getStates'])->name('getStates');
-
+Route::post('incidence/{incidence}/estado', [IncidenceController::class, 'estado'])->name('incidences.estado');
+Route::get('incidence/internos', [IncidenceController::class, 'getIncidentes'])->name('incidente.index');
+Route::get('incidente/{incidence}/edit', [IncidenceController::class, 'editIncidente'])->name('incidente.edit');
+Route::put('incidente/{incidence}/upload', [IncidenceController::class, 'addObservationFile'])->name('incidente.upload');
+Route::get('incidente/{incidence}/view', [IncidenceController::class, 'viewResource'])->name('incidente.view');
+Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
 Route::resource('areas',AreaController::class)->names('areas');
 Route::resource('priorities',PriorityController::class)->names('priorities');
 Route::resource('category',CategoryController::class)->names('categories');
@@ -44,10 +49,6 @@ Route::resource('subcategory',SubcategoryController::class)->names('subcategorie
 Route::resource('employee',EmployeeController::class)->names('employees');
 Route::resource('users',UserController::class)->names('users');
 Route::resource('incidence',IncidenceController::class)->names('incidences');
-Route::get('incidentes', [IncidenceController::class, 'getIncidentes'])->name('incidente.index');
-Route::get('incidente/{incidence}/edit', [IncidenceController::class, 'editIncidente'])->name('incidente.edit');
-Route::put('incidente/{incidence}/upload', [IncidenceController::class, 'addObservationFile'])->name('incidente.upload');
-Route::get('incidente/{incidence}/view', [IncidenceController::class, 'viewResource'])->name('incidente.view');
-Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
+
 // Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
 

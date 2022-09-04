@@ -246,10 +246,10 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <h6> <b>Fecha de Nacimiento:</b></h6>
+                                        <h6> <b>Fecha De Reporte:</b></h6>
 
                                         <p class="mb-4">
-                                            {{$incidence->employees->birthdate}}
+                                            {{$incidence->fechareporte}}
                                         </p>
                                     </div>
                                 </div>

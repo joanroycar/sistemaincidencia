@@ -22,7 +22,7 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::all();
+        $incidences = Incidence::where('statusprogress','1')->get();
         return view('incidence.index',compact('incidences'));
     }
 
@@ -161,9 +161,20 @@ class IncidenceController extends Controller
         
     }
 
+    public function estado(Incidence $incidence)
+    {
+        if ($incidence->statusprogress == '1') {
+            $incidence->update(['statusprogress'=>'2']);
+            return redirect()->back();
+        } elseif($incidence->statusprogress == '2') {
+            $incidence->update(['statusprogress'=>'3']);
+            return redirect()->back();
+        } 
+    }
+
     public function getIncidentes()
     {
-        $incidences = Incidence::all();
+        $incidences = Incidence::where('statusprogress','2')->get();
         return view('incidence.internos.index',compact('incidences'));
     }
 

@@ -157,6 +157,39 @@
 
 
                                 </ul>
+                                <ul>
+
+                                    @switch($incidence->statusprogress)
+                                    @case('1')
+                                    <form action="{{route('incidences.estado', $incidence)}}" class="internos mt-4"
+                                    method="POST">
+                                    @csrf
+                                    {{-- <button class="btn w-full" type="submit"
+                                        style="color:aliceblue; background-color: #3d9970">
+                                        Enviar AS.INTERNOS</button> --}}
+                                    <button type="submit" class="" style="background-color: none"> Enviar Asu.Internos
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-send">
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </button>
+                                </form>    
+                                    @break
+                                    @case('2')
+    
+                                    @break
+                                    @case('3')
+    
+                                    @break
+                                    @default
+                                    @endswitch
+                
+                                    
+                                </ul>
                             </td>
                         </tr>
 
@@ -233,5 +266,29 @@
     })
   
 </script>
-
+<script>
+    $('.internos').submit(function(e){
+        e.preventDefault()
+  
+        Swal.fire({
+          title: 'Estas seguro de Enviar Asuntos Internos?',
+          text: "¡No podrás revertir esto!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Eliminar!',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.value) {
+  
+            
+            this.submit()
+            
+          }
+        })
+  
+    })
+  
+</script>
 @endsection
