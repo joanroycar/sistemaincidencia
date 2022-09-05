@@ -48,9 +48,9 @@
                 </ul>
             </li>
 
-            <li class="menu menu-heading">
+            {{-- <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Articulos</span></div>
-            </li>
+            </li> --}}
             <li class="menu {{ (Request::is('roles') ? 'active' : '') }}">
                 <a href="" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -152,8 +152,8 @@
             <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>REPORTES</span></div>
             </li>
-            <li class="menu">
-                <a href="./charts-apex.html" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu {{ (Request::is('report')||Request::is('report/*') ? 'active' : '') }}">
+                <a href="{{route('reports.index')}}"" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
                         <span>GRAFICOS</span>

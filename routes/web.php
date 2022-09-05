@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -49,6 +50,7 @@ Route::resource('subcategory',SubcategoryController::class)->names('subcategorie
 Route::resource('employee',EmployeeController::class)->names('employees');
 Route::resource('users',UserController::class)->names('users');
 Route::resource('incidence',IncidenceController::class)->names('incidences');
+Route::resource('report',ReportController::class)->names('reports');
 
 // Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
 
