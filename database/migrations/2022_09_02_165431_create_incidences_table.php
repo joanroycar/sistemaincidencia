@@ -30,6 +30,7 @@ return new class extends Migration
             $table->text('observation_soma')->nullable();
             $table->text('observation_interno')->nullable();
             $table->enum('status',['ABIERTO','CERRADO'])->default('ABIERTO');
+            $table->enum('statusprogress',['1','2','3'])->default('1');
             $table->timestamps();
         });
     }
