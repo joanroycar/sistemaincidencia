@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserController;
 use App\Models\Category;
@@ -39,6 +40,7 @@ Route::middleware([
 Route::get('get-states', [IncidenceController::class, 'getStates'])->name('getStates');
 Route::post('incidence/{incidence}/estado', [IncidenceController::class, 'estado'])->name('incidences.estado');
 Route::get('incidence/internos', [IncidenceController::class, 'getIncidentes'])->name('incidente.index');
+Route::get('incidence/ssoma', [IncidenceController::class, 'getIncidentesssoma'])->name('incidentessoma.index');
 Route::get('incidente/{incidence}/edit', [IncidenceController::class, 'editIncidente'])->name('incidente.edit');
 Route::put('incidente/{incidence}/upload', [IncidenceController::class, 'addObservationFile'])->name('incidente.upload');
 Route::get('incidente/{incidence}/view', [IncidenceController::class, 'viewResource'])->name('incidente.view');
@@ -51,6 +53,7 @@ Route::resource('employee',EmployeeController::class)->names('employees');
 Route::resource('users',UserController::class)->names('users');
 Route::resource('incidence',IncidenceController::class)->names('incidences');
 Route::resource('report',ReportController::class)->names('reports');
+Route::resource('role',RoleController::class)->names('roles');
 
 // Route::post('incidente/download', [IncidenceController::class, 'downloadResource'])->name('incidente.download');
 

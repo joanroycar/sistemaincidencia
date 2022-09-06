@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+           
+           
             $table->timestamps();
         });
     }

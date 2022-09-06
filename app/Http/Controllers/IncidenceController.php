@@ -212,4 +212,10 @@ class IncidenceController extends Controller
     {
         return response()->download(storage_path('app/' . $request->url));
     }
+
+    public function getIncidentesssoma()
+    {
+        $incidences = Incidence::where('statusprogress','3')->get();
+        return view('incidence.ssoma.index',compact('incidences'));
+    }
 }
