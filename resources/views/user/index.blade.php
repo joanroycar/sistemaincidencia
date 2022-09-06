@@ -52,7 +52,7 @@
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>
-                                                    {{-- @if(!empty($user->getRoleNames()))
+                                                    @if(!empty($user->getRoleNames()))
                                 
                                                     @foreach($user->getRoleNames() as $rolName)
                                                     
@@ -72,7 +72,7 @@
                                 
                                 
                                     
-                                                    @endif --}}
+                                                    @endif
                                                 
                                                 
                                                 
@@ -83,7 +83,7 @@
                                                     <form action="{{route('users.destroy', $user)}}" method="POST" class="casino">
                                                         @csrf
                                                         @method('DELETE')
-                                                        {{-- <a href="{{route('users.roles', $user)}}" class="btn btn-primary">Asignar Rol</a> --}}
+                                                        <a href="{{route('users.roles', $user)}}" class="btn btn-primary">Asignar Rol</a>
                                                         <a href="{{route('users.edit',$user)}}" class="bs-tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2 p-1 br-8 mb-1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>
 
                                                         <button type="submit" class="" style="background-color: none"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash p-1 br-8 mb-1">

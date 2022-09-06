@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 
 class IncidenceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Modulo Asuntos Internos')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+        $this->middleware('can:Modulo Incidencias')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+        $this->middleware('can:Modulo SSOMA')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+
+    }
     /**
      * Display a listing of the resource.
      *

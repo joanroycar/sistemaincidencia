@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -80,6 +81,13 @@ class UserController extends Controller
         return view('user.edit', compact('user'));
     }
 
+    public function editrol(User $user){
+
+        $roles = Role::all();
+
+        return view('user.role',compact('user','roles'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -103,6 +111,17 @@ class UserController extends Controller
             $user->password = ($request->password) // No es necesario poner Bycrit ya que en el Modelo hay un metodo
                                                    // que encripta todo los datos enviados en un Input con name password.
         ]);
+
+        return redirect()->route('users.index');
+    }
+
+    public function updaterol(Request $request, User $user)
+    {
+        $request->validate([
+            'roles' => 'required'
+        ]);
+
+        $user->roles()->sync($request->roles);
 
         return redirect()->route('users.index');
     }
