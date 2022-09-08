@@ -26,31 +26,27 @@
         </div>
         <div class="shadow-bottom"></div>
         <ul class="list-unstyled menu-categories" id="accordionExample">
-            {{-- <li class="menu active">
-                <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+            <li class="menu {{ (Request::is('dashboard') ? 'active' : '') }}">
+                <a href="{{route('dashboard')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
 
                         <span>
                             Dashboard</span>
                     </div>
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
+                   
                 </a>
-                <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
-                    <li class="active">
-                        <a href="./index.html"> Analytics </a>
-                    </li>
-                    <li>
-                        <a href="./index2.html"> Sales </a>
-                    </li>
-                </ul>
-            </li> --}}
+               
+            </li>
 <br>
-            {{-- <li class="menu menu-heading">
+
+    
+            <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>Articulos</span></div>
-            </li> --}}
+            </li>
+
+            @can('roles.index')
+
             <li class="menu {{ (Request::is('role') ? 'active' : '') }}">
                 <a href="{{route('roles.index')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -61,6 +57,9 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+            @can('users.index')
 
             <li class="menu {{ (Request::is('users') ? 'active' : '') }}">
                 <a href="{{route('users.index')}}" aria-expanded="false" class="dropdown-toggle">
@@ -72,6 +71,10 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+            @can('area.index')
+
             {{-- <li class="{{ (Request::is('products/*') || Request::is('products') || Request::is('product/*') ? 'active' : '') }}"><a href="{{url('products')}}"><i class="fa fa-code-fork"></i>&nbsp; Products</a></li> --}}
             <li class="menu {{ (Request::is('areas')||Request::is('areas/*') ? 'active' : '') }}">
                 <a href="{{route('areas.index')}}" aria-expanded="false" class="dropdown-toggle">
@@ -83,6 +86,9 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+            @can('priority.index')
 
             <li class="menu {{ (Request::is('priorities')||Request::is('priorities/*') ? 'active' : '') }}">
                 <a href="{{route('priorities.index')}}" aria-expanded="false" class="dropdown-toggle">
@@ -94,6 +100,9 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+            @can('category.index')
 
             <li class="menu {{ (Request::is('category')||Request::is('category/*') ? 'active' : '') }}">
                 <a href="{{route('categories.index')}}" aria-expanded="false" class="dropdown-toggle">
@@ -104,6 +113,10 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+            @can('subcategory.index')
+
             <li class="menu {{ (Request::is('subcategory')||Request::is('subcategory/*') ? 'active' : '') }}">
                 <a href="{{route('subcategories.index')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -113,6 +126,9 @@
                     </div>
                 </a>
             </li>
+            @endcan
+            @can('employee.index')
+
             <li class="menu {{ (Request::is('employee')||Request::is('employee/*') ? 'active' : '') }}">
                 <a href="{{route('employees.index')}}" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
@@ -123,6 +139,9 @@
                     </div>
                 </a>
             </li>
+            @endcan
+
+
             <li class="menu ">
                 <a href="#invoice" data-bs-toggle="collapse" aria-expanded="{{ (Request::is('incidence')||Request::is('incidence/*')  || Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'true' : '') }}" class="dropdown-toggle">
                     <div class="">
@@ -132,20 +151,87 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                     </div>
                 </a>
+
                 <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('incidence/*') ||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
+                    @can('incidence.index')
                     <li class="{{ (Request::is('incidence')||Request::is('incidence/*')  ? 'active' : '') }}">
 
                         <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
                     </li>
+                    @endcan
+                   
+                    @can('incidence.getIncidentes')
+
                     <li class="{{ (Request::is('incidence/internos') ? 'active' : '') }}">
                         <a href="{{route('incidente.index')}}">Asuntos Internos</a>
                     </li>
+                    @endcan
+
+                    @can('incidence.getIncidentesssoma')
+
                     <li class="{{ (Request::is('incidence/ssoma') ? 'active' : '') }}">
                         <a href="{{route('incidentessoma.index')}}"> SSOMMA </a>
                     </li>
-                                              
+                    @endcan
+                     
                 </ul>
+
+                {{-- @can('incidence.getIncidentes')
+
+                <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('incidence/*') ||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
+                    @can('incidence.index')
+                    <li class="{{ (Request::is('incidence')||Request::is('incidence/*')  ? 'active' : '') }}">
+
+                        <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
+                    </li>
+                    @endcan
+                   
+                    @can('incidence.getIncidentes')
+
+                    <li class="{{ (Request::is('incidence/internos') ? 'active' : '') }}">
+                        <a href="{{route('incidente.index')}}">Asuntos Internos</a>
+                    </li>
+                    @endcan
+
+                    @can('incidence.getIncidentesssoma')
+
+                    <li class="{{ (Request::is('incidence/ssoma') ? 'active' : '') }}">
+                        <a href="{{route('incidentessoma.index')}}"> SSOMMA </a>
+                    </li>
+                    @endcan
+                     
+                </ul>
+                @endcan
+                @can('incidence.getIncidentesssoma')
+
+                <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('incidence/*') ||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
+                    @can('incidence.index')
+                    <li class="{{ (Request::is('incidence')||Request::is('incidence/*')  ? 'active' : '') }}">
+
+                        <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
+                    </li>
+                    @endcan
+                   
+                    @can('incidence.getIncidentes')
+
+                    <li class="{{ (Request::is('incidence/internos') ? 'active' : '') }}">
+                        <a href="{{route('incidente.index')}}">Asuntos Internos</a>
+                    </li>
+                    @endcan
+
+                    @can('incidence.getIncidentesssoma')
+
+                    <li class="{{ (Request::is('incidence/ssoma') ? 'active' : '') }}">
+                        <a href="{{route('incidentessoma.index')}}"> SSOMMA </a>
+                    </li>
+                    @endcan
+                     
+                </ul>
+                @endcan --}}
+
             </li>
+
+            @can('report.index')
 
             <li class="menu menu-heading">
                 <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>REPORTES</span></div>
@@ -158,6 +244,7 @@
                     </div>
                 </a>
             </li>
+            @endcan
 
             
 

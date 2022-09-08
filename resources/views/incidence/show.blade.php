@@ -260,7 +260,19 @@
 
                         </div>
 
+
+                        @can('incidence.addObservarionInterno')
                         @include('incidence.internos.prueba')
+
+                        @endcan
+
+
+
+                        @can('incidence.addObservationFile')
+
+                        @include('incidence.ssoma.form')
+                        @endcan
+
                     </div>
                 </div>
             </div>

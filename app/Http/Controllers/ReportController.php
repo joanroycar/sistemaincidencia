@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:report.index')->only('index');
+        
+    }
     public function index()
     {
         $totalincidences=0;

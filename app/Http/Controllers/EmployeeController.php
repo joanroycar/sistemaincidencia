@@ -11,11 +11,15 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:employee.index')->only('index');
+         $this->middleware('can:employee.edit')->only('edit','update');
+         $this->middleware('can:employee.create')->only('create','store');
+         $this->middleware('can:employee.destroy')->only('destroy');
+
+    }
     public function index()
     {
         $employees = Employee::all();

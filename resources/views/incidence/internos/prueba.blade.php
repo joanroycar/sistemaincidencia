@@ -3,10 +3,12 @@
 <div class="container">
        <div class="row">
 
+
+            
     <h4 class="mt-5">Añadir Observacion Incidencia</h4>
     
 
-    {!! Form::model($incidence, ['route' => ['incidente.upload', $incidence], 'method' => 'put', 'files' => true, 'class'=>'formulario row g-3']) !!}
+    {!! Form::model($incidence, ['route' => ['incidente.uploadinterno', $incidence], 'method' => 'put', 'files' => true, 'class'=>'formulario row g-3']) !!}
     <div class="col-md-12">
         <label for="asunto" class="form-label">Asunto:</label>
         <input type="name" class="form-control" id="asunto" name="asunto" style="color: white" value="{{$incidence->asunto}}" readonly>
@@ -24,6 +26,7 @@
         <strong class="text-sm text-red-600" style="color: red">{{$message}}</strong>
     @enderror 
     </div>
+    <h4>APARTADO DE ASUNTOS INTERNOS:</h4>
 
     <div class="col-md-12">
         <label for="observation" class="form-label">Agregar una Observacion:</label>
@@ -34,18 +37,9 @@
         <strong class="text-sm text-red-600" style="color: red">{{$message}}</strong>
     @enderror 
     </div>
-
-    <div class="flex items-center">
-        <input id="file" name="file" type="file" class="form-input flex-1">
-    </div>
-
-    @error('file')
-        <span class="text-xs text-red-500">{{$message}}</span>
-    @enderror
-
-        <div class="col-12">
+    <div class="col-12">
             <button type="submit" class="btn btn-primary" style="float: right;">Guardar Información</button>
-        </div>
+    </div>
 
     {!! Form::close() !!}
 

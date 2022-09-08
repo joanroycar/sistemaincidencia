@@ -10,7 +10,15 @@ use PhpParser\Node\Stmt\Return_;
 
 class SubcategoryController extends Controller
 {
-  
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:subcategory.index')->only('index');
+         $this->middleware('can:subcategory.edit')->only('edit','update');
+         $this->middleware('can:subcategory.create')->only('create','store');
+         $this->middleware('can:subcategory.destroy')->only('destroy');
+
+    }
     public function index()
     {
         $subcategories= Subcategory::all();

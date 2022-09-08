@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:area.index')->only('index');
+         $this->middleware('can:area.edit')->only('edit','update');
+         $this->middleware('can:area.create')->only('create','store');
+         $this->middleware('can:area.destroy')->only('destroy');
+
+    }
     public function index()
     {
         $areas = Area::all();

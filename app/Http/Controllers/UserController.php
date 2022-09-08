@@ -9,11 +9,16 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:users.index')->only('index');
+         $this->middleware('can:users.edit')->only('edit','update');
+         $this->middleware('can:users.create')->only('create','store');
+         $this->middleware('can:users.destroy')->only('destroy');
+
+    }
+    
     public function index()
     {
         $users = User::all();

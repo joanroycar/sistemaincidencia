@@ -15,18 +15,31 @@ use Illuminate\Support\Facades\DB;
 
 class IncidenceController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('can:Modulo Asuntos Internos')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+    //     $this->middleware('can:Modulo Incidencias')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+    //     $this->middleware('can:Modulo SSOMA')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+
+    // }
+
     public function __construct()
     {
-        $this->middleware('can:Modulo Asuntos Internos')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
-        $this->middleware('can:Modulo Incidencias')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
-        $this->middleware('can:Modulo SSOMA')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
+         $this->middleware('auth');
+         $this->middleware('can:incidence.index')->only('index');
+         $this->middleware('can:incidence.edit')->only('edit','update');
+         $this->middleware('can:incidence.create')->only('create','store','getStates');
+         $this->middleware('can:incidence.show')->only('show');
+         $this->middleware('can:incidence.destroy')->only('destroy');
+         $this->middleware('can:incidence.getIncidentes')->only('getIncidentes');
+         $this->middleware('can:incidence.addObservarionInterno')->only('addObservarionInterno');
+         $this->middleware('can:incidence.getIncidentesssoma')->only('getIncidentesssoma');
+         $this->middleware('can:incidence.addObservationFile')->only('addObservationFile');
 
+         
+         
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $incidences = Incidence::where('statusprogress','1')->get();
@@ -58,12 +71,7 @@ class IncidenceController extends Controller
             return response()->json($states);
         }
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -96,23 +104,12 @@ class IncidenceController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Incidence $incidence)
     {
         return view('incidence.show',compact('incidence'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Incidence $incidence)
     {
         $employees= Employee::pluck('name','id');
@@ -120,9 +117,7 @@ class IncidenceController extends Controller
         $category= Category::pluck('name','id');
         $priorities= Priority::pluck('name','id');
 
-
         return view('incidence.edit',compact('incidence','employees','subcategories','category','priorities'));
-    
     }
 
     /**
@@ -157,12 +152,6 @@ class IncidenceController extends Controller
         return redirect()->route('incidences.index')->with('editar', 'ok');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         
@@ -190,10 +179,24 @@ class IncidenceController extends Controller
         return view('incidence.internos.edit', compact('incidence'));
     }
 
+
+    public function addObservarionInterno(Request $request, Incidence $incidence){
+        $request->validate([
+            'observation_interno'=>'required',
+        ]);
+
+        $incidence->update([
+            $incidence->observation_interno = $request->observation_interno
+        ]);
+
+        return redirect()->route('incidente.index')->with('guardar', 'ok');
+
+    }
+
     public function addObservationFile(Request $request, Incidence $incidence)
     {
         $request->validate([
-            'observation_interno'=>'required',
+            'observation_soma'=>'required',
             'file'=>'required'
         ]);
 
@@ -204,10 +207,10 @@ class IncidenceController extends Controller
         ]);
 
         $incidence->update([
-            $incidence->observation_interno = $request->observation_interno
+            $incidence->observation_soma = $request->observation_soma
         ]);
 
-        return redirect()->route('incidente.index')->with('guardar', 'ok');
+        return redirect()->route('incidentessoma.index')->with('guardar', 'ok');
     }
 
     public function viewResource(Incidence $incidence)

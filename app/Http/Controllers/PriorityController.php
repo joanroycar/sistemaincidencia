@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class PriorityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:priority.index')->only('index');
+         $this->middleware('can:priority.edit')->only('edit','update');
+         $this->middleware('can:priority.create')->only('create','store');
+         $this->middleware('can:priority.destroy')->only('destroy');
+
+    }
     public function index()
     {
         $priorities = Priority::all();

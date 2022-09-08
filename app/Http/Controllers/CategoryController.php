@@ -8,11 +8,15 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+         $this->middleware('auth');
+         $this->middleware('can:category.index')->only('index');
+         $this->middleware('can:category.edit')->only('edit','update');
+         $this->middleware('can:category.create')->only('create','store');
+         $this->middleware('can:category.destroy')->only('destroy');
+
+    }
     public function index()
     {
         $categories= Category::all();
