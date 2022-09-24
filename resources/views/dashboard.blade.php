@@ -30,21 +30,21 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="../src/assets/img/1.jpeg" alt="First slide">
+                <img class="d-block w-100" src="../src/assets/img/img_tren_1.jpg" alt="First slide">
                 <div class="carousel-caption d-none d-sm-block">
                     <h3>First slide</h3>
                     <h5>Lorem ipsum dolor sit amet, dolore magna aliqua.</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="../src/assets/img/3.jpeg" alt="Second slide">
+                <img class="d-block w-100" src="../src/assets/img/img_tren_2.jpg" alt="Second slide">
                 <div class="carousel-caption d-none d-sm-block">
                     <h3>Second slide</h3>
                     <h5>Lorem ipsum dolor sit amet, dolore magna aliqua.</h5>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="../src/assets/img/2.jpg" alt="Third slide">
+                <img class="d-block w-100" src="../src/assets/img/img_tren_3.jpg" alt="Third slide">
                 <div class="carousel-caption d-none d-sm-block">
                     <h3>Third slide</h3>
                     <h5>Lorem ipsum dolor sit amet, dolore magna aliqua.</h5>
