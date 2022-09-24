@@ -155,7 +155,7 @@
                                     {{-- <button class="btn w-full" type="submit"
                                         style="color:aliceblue; background-color: #3d9970">
                                         Enviar AS.INTERNOS</button> --}}
-                                    <button type="submit" class="" style="background-color: none"> Enviar SSOMA
+                                    <button type="submit" class="" style="background-color: none"> Enviar Gerencia
 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
