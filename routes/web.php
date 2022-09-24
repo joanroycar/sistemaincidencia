@@ -46,6 +46,7 @@ Route::get('incidence/admin', [IncidenceController::class, 'incidenceadmin'])->n
 // Route::get('incidence/internos', [IncidenceController::class, 'getIncidentes'])->middleware('can:Modulo Asuntos Internos')->name('incidente.index');
 // Route::get('incidence/ssoma', [IncidenceController::class, 'getIncidentesssoma'])->middleware('can:Modulo SSOMA')->name('incidentessoma.index');
 Route::get('incidence/ssoma', [IncidenceController::class, 'getIncidentesssoma'])->name('incidentessoma.index');
+Route::post('incidence/export/', [IncidenceController::class, 'exportAllFechas'])->name('incidence.export');
 
 Route::get('incidente/{incidence}/edit', [IncidenceController::class, 'editIncidente'])->name('incidente.edit');
 Route::put('incidente/{incidence}/upload', [IncidenceController::class, 'addObservationFile'])->name('incidente.upload');

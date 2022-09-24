@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\IncidenciaFechasExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Employee;
@@ -13,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+
 class IncidenceController extends Controller
 {
     // public function __construct()
@@ -35,7 +38,7 @@ class IncidenceController extends Controller
          $this->middleware('can:incidence.addObservarionInterno')->only('addObservarionInterno');
          $this->middleware('can:incidence.getIncidentesssoma')->only('getIncidentesssoma');
          $this->middleware('can:incidence.addObservationFile')->only('addObservationFile');
-         $this->middleware('can:incidence.incidenceadmin')->only('incidenceadmin');
+         $this->middleware('can:incidence.incidenceadmin')->only('incidenceadmin','exportAllFechas');
 
 
          
@@ -252,5 +255,16 @@ class IncidenceController extends Controller
         $incidences = Incidence::where('statusprogress','4')->get();
         return view('incidence.admin.index',compact('incidences'));
     }
+    public function exportAllFechas(Request $request){
+
+
+        $incidences = Incidence::where('status','CERRADO')->whereBetween(DB::raw('DATE(fechareporte)'),[$request->fechainicial,$request->fechaterminal])->get();
+    
+    
+        return Excel::download(new IncidenciaFechasExport($request->fechainicial,$request->fechaterminal,$incidences), 'incidencias.xlsx');
+    
+    
+    }
+
 
 }
