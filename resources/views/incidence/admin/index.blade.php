@@ -22,6 +22,44 @@
 
     <!-- /BREADCRUMB -->
 
+    
+    <div class="card-body "style="background-color:rgba(0,0,0,.03)">
+        {!! Form::open(['route' => 'incidence.export', 'autocomplete' => 'off', 'files' => true, 'class'=>'formulario']) !!}
+  
+        <div class="row" >
+    
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Fecha Inicial:</label>
+                  {!! Form::date('fechainicial', null, ['class' => 'form-control  block w-full mt-1'. ($errors->has('fechaNacimiento') ? ' border-red-600' : '')]) !!}
+    
+                  @error('fechaterminal')        
+                  <small class="text-danger">
+                    <b>{{$message}}</b>
+                  </small>
+                  @enderror
+                </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <label for="example-text-input" class="form-control-label">Fecha Salida:</label>
+                {!! Form::date('fechaterminal', null, ['class' => 'form-control  block w-full mt-1'. ($errors->has('fechaNacimiento') ? ' border-red-600' : '')]) !!}
+    
+                @error('fechaterminal')        
+                <small class="text-danger">
+                  <b>{{$message}}</b>
+                </small>
+                @enderror
+              </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+              <br>
+              <button type="submit" class="btn btn-primary btn-xm ms-auto mt-2">Exportar Información   <i class="fa fa-file-excel-o text-white text-sm opacity-10"></i></button>
+          </div>
+           </div>
+      </div>
+    </div>
     <div class="row layout-top-spacing">
 
         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
