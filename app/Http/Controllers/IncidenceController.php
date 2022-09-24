@@ -166,6 +166,10 @@ class IncidenceController extends Controller
             $incidence->update(['statusprogress'=>'3']);
             return redirect()->back();
         } 
+        elseif($incidence->statusprogress == '3') {
+            $incidence->update(['statusprogress'=>'4']);
+            return redirect()->back();
+        } 
     }
 
     public function getIncidentes()
