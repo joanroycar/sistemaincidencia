@@ -35,6 +35,8 @@ class IncidenceController extends Controller
          $this->middleware('can:incidence.addObservarionInterno')->only('addObservarionInterno');
          $this->middleware('can:incidence.getIncidentesssoma')->only('getIncidentesssoma');
          $this->middleware('can:incidence.addObservationFile')->only('addObservationFile');
+         $this->middleware('can:incidence.incidenceadmin')->only('incidenceadmin');
+
 
          
          
@@ -245,4 +247,10 @@ class IncidenceController extends Controller
         return $pdf->download('incidence.pdf');  
 
     }
+
+    public function incidenceadmin(){
+        $incidences = Incidence::where('statusprogress','4')->get();
+        return view('incidence.admin.index',compact('incidences'));
+    }
+
 }

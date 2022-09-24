@@ -13,7 +13,7 @@
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Tabla</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Incidencias / Asuntos Internos</li>
+                <li class="breadcrumb-item active" aria-current="page">Incidencias / Admin</li>
             </ol>
         </nav>
 
@@ -137,7 +137,10 @@
                                     <a href="{{route('incidente.view',$incidence)}}" class="bs-tooltip"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Detaller"
                                         data-original-title="Edit">Recursos</a>
-
+                                        <a href="{{route('incidence.pdf',$incidence)}}" class="text-danger font-weight-bold text-xl" title="PDF" data-toggle="tooltip" data-original-title="PDF">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                          
+                                        </a>
 
                                     {{-- <form action="{{route('incidences.destroy', $incidence)}}" method="POST"
                                         class="casino">
@@ -169,49 +172,7 @@
 
 
                                 </ul>
-                                @if($incidence->observation_interno != '')
-                                <ul>
-                                    
-
-                                    @switch($incidence->statusprogress)
-                                    @case('2')
-                                    <form action="{{route('incidences.estado', $incidence)}}" class="internos mt-4"
-                                    method="POST">
-                                    @csrf
-                                    {{-- <button class="btn w-full" type="submit"
-                                        style="color:aliceblue; background-color: #3d9970">
-                                        Enviar AS.INTERNOS</button> --}}
-                                    <button type="submit" class="" style="background-color: none"> Enviar SSOMA
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-send">
-                                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                        </svg>
-                                    </button>
-                                 </form>    
-                                    @break
-                                    @case('1')
-    
-                                    @break
-                                    @case('3')
-    
-                                    @break
-
-                                    @case('4')
-    
-                                    @break
-                                    @default
-                                    @endswitch
-                
-                                    
-                                </ul>
-                                @else
-
-                                @endif
-
+                                
                             </td>
                         </tr>
 
