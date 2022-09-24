@@ -268,7 +268,11 @@
                             
                     
                         @else
+
+
                         @can('incidence.addObservarionInterno')
+
+                        
                         @include('incidence.internos.prueba')
 
                         @endcan

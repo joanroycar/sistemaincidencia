@@ -169,7 +169,9 @@
 
 
                                 </ul>
+                                @if($incidence->observation_interno != '')
                                 <ul>
+                                    
 
                                     @switch($incidence->statusprogress)
                                     @case('2')
@@ -189,7 +191,7 @@
                                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                                         </svg>
                                     </button>
-                                </form>    
+                                 </form>    
                                     @break
                                     @case('2')
     
@@ -202,6 +204,10 @@
                 
                                     
                                 </ul>
+                                @else
+
+                                @endif
+
                             </td>
                         </tr>
 

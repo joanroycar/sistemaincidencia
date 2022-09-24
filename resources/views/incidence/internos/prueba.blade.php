@@ -4,7 +4,6 @@
        <div class="row">
 
 
-            
     <h4 class="mt-5">Añadir Observacion Incidencia</h4>
     
 
@@ -28,6 +27,8 @@
     </div>
     <h4>APARTADO DE ASUNTOS INTERNOS:</h4>
 
+    @if($incidence->observation_interno == '')        
+
     <div class="col-md-12">
         <label for="observation" class="form-label">Agregar una Observacion:</label>
         {{-- <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}">  --}}
@@ -41,7 +42,13 @@
             <button type="submit" class="btn btn-primary" style="float: right;">Guardar Información</button>
     </div>
 
+
     {!! Form::close() !!}
+    @else
+    <textarea class="form-control" id="observation_interno" name="observation_interno" rows="3" value="{{old('observation')}}" readonly>{{$incidence->observation_interno}}</textarea>
+
+
+    @endif
 
 </div>
 </div>
