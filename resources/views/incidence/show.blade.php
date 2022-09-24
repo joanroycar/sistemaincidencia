@@ -260,7 +260,14 @@
 
                         </div>
 
+                        @if ($incidence->status == 'CERRADO')
 
+                        @include('incidence.general')
+
+
+                            
+                    
+                        @else
                         @can('incidence.addObservarionInterno')
                         @include('incidence.internos.prueba')
 
@@ -272,6 +279,7 @@
 
                         @include('incidence.ssoma.form')
                         @endcan
+                        @endif
 
                     </div>
                 </div>

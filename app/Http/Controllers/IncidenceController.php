@@ -12,7 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 class IncidenceController extends Controller
 {
     // public function __construct()
@@ -187,6 +187,7 @@ class IncidenceController extends Controller
 
         $incidence->update([
             $incidence->observation_interno = $request->observation_interno
+
         ]);
 
         return redirect()->route('incidente.index')->with('guardar', 'ok');
@@ -208,6 +209,10 @@ class IncidenceController extends Controller
 
         $incidence->update([
             $incidence->observation_soma = $request->observation_soma
+        ]+[
+            'fechatermino'=> Carbon::now('America/Lima'),
+            'status'=>'CERRADO'
+
         ]);
 
         return redirect()->route('incidentessoma.index')->with('guardar', 'ok');
@@ -227,5 +232,13 @@ class IncidenceController extends Controller
     {
         $incidences = Incidence::where('statusprogress','3')->get();
         return view('incidence.ssoma.index',compact('incidences'));
+    }
+
+    public function incidencepdf(Incidence $incidence){
+
+        $pdf = Pdf::loadView('incidence.pdf.index',compact('incidence'));
+
+        return $pdf->download('incidence.pdf');  
+
     }
 }
