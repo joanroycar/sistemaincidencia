@@ -6,8 +6,7 @@
     <!-- BREADCRUMB -->
     <div class="page-meta">
         {{-- <div class="col text-right"> --}}
-            <a href="{{url('/incidence/create')}}" class="btn btn-xm btn-primary" style="float: right;">Registrar
-                Incidencia</a>
+         
             {{--
         </div> --}}
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
