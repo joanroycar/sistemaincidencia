@@ -173,6 +173,10 @@
                         <a href="{{route('incidentessoma.index')}}"> SSOMMA </a>
                     </li>
                     @endcan
+
+                    <li class="{{ (Request::is('incidence/admin') ? 'active' : '') }}">
+                        <a href="{{route('incidenceadmin.index')}}"> Gerente </a>
+                    </li>
                      
                 </ul>
 
@@ -247,7 +251,7 @@
             @endcan
 
             
-
+           
             
 
             

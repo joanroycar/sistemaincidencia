@@ -75,6 +75,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'incidence.getIncidentesssoma','description'=>'Ver Incientes en SSOMA'])->syncRoles([$role1]);
         Permission::create(['name' => 'incidence.addObservationFile','description'=>'Agregar Observación de Sssoma'])->syncRoles([$role1]);
 
+        
+        Permission::create(['name' => 'incidence.incidenceadmin','description'=>'Ver Incientes en Gerente'])->syncRoles([$role1]);
 
         Permission::create(['name' => 'users.index','description'=>'Ver Listado de Usuarios'])->syncRoles([$role1]);
         Permission::create(['name' => 'users.create','description'=>'Crear Usuarios'])->syncRoles([$role1]);
