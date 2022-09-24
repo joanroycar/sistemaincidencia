@@ -131,7 +131,7 @@
                                             </svg>
 
                                         </a>
-                                        <a href="{{route('incidences.edit',$incidence)}}" class="bs-tooltip"
+                                        {{-- <a href="{{route('incidences.edit',$incidence)}}" class="bs-tooltip"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Editar"
                                             data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -139,7 +139,7 @@
                                                 stroke-linejoin="round" class="feather feather-edit-2 p-1 br-8 mb-1">
                                                 <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
                                                 </path>
-                                            </svg></a>
+                                            </svg></a> --}}
 
                                             <a href="{{route('incidence.pdf',$incidence)}}" class="text-danger font-weight-bold text-xl" title="PDF" data-toggle="tooltip" data-original-title="PDF">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
