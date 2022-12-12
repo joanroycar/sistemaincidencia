@@ -66,22 +66,24 @@ class ReportController extends Controller
 
         $year = Carbon::now('America/Lima')->format('Y');
 
-        $salesByMonths = DB::select(
-            DB::raw(" SELECT coalesce(total,0) as total FROM (SELECT 'january' AS month UNION SELECT 'february' 
-            AS month UNION SELECT 'march' AS month UNION SELECT 'april' AS month UNION SELECT 'may' AS month UNION SELECT 'june'
-             AS month UNION SELECT 'july' AS month UNION SELECT 'august' AS month UNION SELECT 'september' AS month UNION SELECT 'october'
-              AS month UNION SELECT 'november' AS month UNION SELECT 'december' AS month ) m LEFT JOIN (SELECT MONTHNAME(fechareporte) AS MONTH,
-               COUNT(*) AS incidences, COUNT(incidences.id) AS total FROM incidences WHERE year(fechareporte)= 2022 GROUP BY MONTHNAME(fechareporte),
-               MONTH(fechareporte) ORDER BY MONTH(fechareporte)) c ON m.MONTH =c.MONTH;
-            ")
-        );
+        // $salesByMonths = DB::select(
+        //     DB::raw(" SELECT coalesce(total,0) as total FROM (SELECT 'january' AS month UNION SELECT 'february' 
+        //     AS month UNION SELECT 'march' AS month UNION SELECT 'april' AS month UNION SELECT 'may' AS month UNION SELECT 'june'
+        //      AS month UNION SELECT 'july' AS month UNION SELECT 'august' AS month UNION SELECT 'september' AS month UNION SELECT 'october'
+        //       AS month UNION SELECT 'november' AS month UNION SELECT 'december' AS month ) m LEFT JOIN (SELECT MONTHNAME(fechareporte) AS MONTH,
+        //        COUNT(*) AS incidences, COUNT(incidences.id) AS total FROM incidences WHERE year(fechareporte)= 2022 GROUP BY MONTHNAME(fechareporte),
+        //        MONTH(fechareporte) ORDER BY MONTH(fechareporte)) c ON m.MONTH =c.MONTH;
+        //     ")
+        // );
+
+        $salesByMonths = DB::select('CALL spreport(?)',array($year));
 
         $report=[];
         foreach($salesByMonths as $salesByMonth){
                  
-            //    $report['label'][] = $salesByMonth->mes;
+                $report['label'][] = $salesByMonth->mes;
 
-                $report['report'][] = $salesByMonth->total;
+                $report['report'][] = $salesByMonth->cantidad;
 
           }
 

@@ -42,6 +42,7 @@ Route::post('incidence/{incidence}/estado', [IncidenceController::class, 'estado
 Route::get('incidence/internos', [IncidenceController::class, 'getIncidentes'])->name('incidente.index');
 Route::get('/incidence/{incidence}/pdf',[IncidenceController::class, 'incidencepdf'])->name('incidence.pdf');
 Route::get('incidence/admin', [IncidenceController::class, 'incidenceadmin'])->name('incidenceadmin.index');
+Route::get('incidence/general', [IncidenceController::class, 'incidencegeneral'])->name('incidence.general');
 
 // Route::get('incidence/internos', [IncidenceController::class, 'getIncidentes'])->middleware('can:Modulo Asuntos Internos')->name('incidente.index');
 // Route::get('incidence/ssoma', [IncidenceController::class, 'getIncidentesssoma'])->middleware('can:Modulo SSOMA')->name('incidentessoma.index');

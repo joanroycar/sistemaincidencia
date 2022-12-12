@@ -154,12 +154,17 @@
 
                 <ul class="collapse submenu list-unstyled {{ (Request::is('incidence')||Request::is('incidence/*') ||Request::is('categories')||Request::is('measures')||Request::is('supliers') ? 'show' : '') }}" id="invoice" data-bs-parent="#accordionExample">
                     @can('incidence.index')
-                    <li class="{{ (Request::is('incidence')||Request::is('incidence/*')  ? 'active' : '') }}">
+                    <li class="{{ (Request::is('incidence') ? 'active' : '') }}">
 
                         <a href="{{route('incidences.index')}}"> Lista de Incidencias </a>
                     </li>
                     @endcan
-                   
+                    @can('incidence.index')
+                    <li class="{{ (Request::is('incidence/general')  ? 'active' : '') }}">
+
+                        <a href="{{route('incidence.general')}}"> Estado de Incidencias </a>
+                    </li>
+                    @endcan
                     @can('incidence.getIncidentes')
 
                     <li class="{{ (Request::is('incidence/internos') ? 'active' : '') }}">

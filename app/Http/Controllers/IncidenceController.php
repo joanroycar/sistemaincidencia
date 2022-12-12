@@ -18,13 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class IncidenceController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('can:Modulo Asuntos Internos')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
-    //     $this->middleware('can:Modulo Incidencias')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
-    //     $this->middleware('can:Modulo SSOMA')->only('getStates', 'estado', 'editIncidente','addObservationFile','viewResource','downloadResource');
-
-    // }
+   
 
     public function __construct()
     {
@@ -38,11 +32,7 @@ class IncidenceController extends Controller
          $this->middleware('can:incidence.addObservarionInterno')->only('addObservarionInterno');
          $this->middleware('can:incidence.getIncidentesssoma')->only('getIncidentesssoma');
          $this->middleware('can:incidence.addObservationFile')->only('addObservationFile');
-         $this->middleware('can:incidence.incidenceadmin')->only('incidenceadmin','exportAllFechas');
-
-
-         
-         
+         $this->middleware('can:incidence.incidenceadmin')->only('incidenceadmin','exportAllFechas');     
     }
     
     public function index()
@@ -86,17 +76,7 @@ class IncidenceController extends Controller
             'subcategory_id' => 'required|not_in:Seleccione una Subcategoria .....',
             'observation' => 'required|not_in:Seleccione Un Area .....',         
          ]
-        //  ,[
-        //     'name.required'=>'EL nombre es un campo obligatorio.',
-        //     'lastname.required'=>'El apellido es un campo obligatorio.',
-        //     'phone.required'=>'EL telefono es un campo obligatorio.',
-        //     'birthdate.required'=>'La fecha de nacimiento es un campo obligatorio.',
-        //     'document_type_id.required' => 'El Tipo De Documento es obligatorio.',
-        //     'area_id.required' => 'El area es obligatorio.',
-        //     'numdocument.required'=>'El número de documento es obligatorio.',
-        //     'numdocument.numeric'=>'El campo debe contener números.'
-
-        //  ]
+        
         );
 
         $Incidence = Incidence::create($request->all()+[
@@ -175,6 +155,12 @@ class IncidenceController extends Controller
             $incidence->update(['statusprogress'=>'4']);
             return redirect()->back();
         } 
+    }
+
+    public function incidencegeneral(){
+        $incidences = Incidence::all();
+
+        return view('incidence.indexgeneral',compact('incidences'));
     }
 
     public function getIncidentes()

@@ -16,4 +16,7 @@ class Employee extends Model
     public function documenttypes(){
         return $this->belongsTo(DocumentType::class,'document_type_id');
     }
+    public function incidences(){
+        return $this->hasMany(Incidence::class);
+    }
 }

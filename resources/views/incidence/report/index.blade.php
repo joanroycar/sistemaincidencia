@@ -187,7 +187,7 @@
         const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-            labels:["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+            labels:cData.label,
             datasets: [{
                 label: '# De Total Incidentes',
                 data:cData.report,
